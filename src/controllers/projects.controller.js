@@ -55,6 +55,36 @@ export const saveProject = async (req,res)=>{
 }
 
 export const updateProject = async (req,res)=>{
+
+  const { name, priority, description, deliveryday } = req.body
+  const { projectId } = req.params
+
+  try {
+    const projects = await Project.findAll({
+      attributes: ['id','name','priority','description','deliveryday'],
+      where: {
+        id: projectId
+      }
+    })
+  
+    if (projects.length>0) {    
+      projects.forEach(async project=>{
+        await project.update({
+          name,
+          priority,
+          description,
+          deliveryday
+        })
+      })
+    }
+  
+    return res.json({
+      msg: "Project updated successfully!",
+      data: projects
+    })
+  } catch (error) {
+    console.log(error)
+  }
   
 }
 
