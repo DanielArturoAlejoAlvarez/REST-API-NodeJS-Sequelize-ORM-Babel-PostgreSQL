@@ -1,5 +1,18 @@
 import Project from '../models/Project'
 
+export const getProjects = async (req,res)=>{
+  try {
+    const projects = await Project.findAll()
+    return res.json({
+      data: projects
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
+
 export const saveProject = async (req,res)=>{
   const {name,priority,description,deliveryday} = req.body
 
