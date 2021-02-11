@@ -1,5 +1,6 @@
 import Sequelize from 'sequelize'
 import { sequelize } from '../config/database'
+import Task from './Task';
 
 const Project = sequelize.define('projects', {
   id: {
@@ -18,6 +19,12 @@ const Project = sequelize.define('projects', {
   deliveryday: {
     type: Sequelize.DATE
   }
+},
+{
+  timestamps: false
 });
+
+Project.hasMany(Task, {primaryKey: 'projectid', sourceKey: 'id'})
+Task.belongsTo(Project, {primaryKey: 'projectid', sourceKey: 'id'})
 
 export default Project;
