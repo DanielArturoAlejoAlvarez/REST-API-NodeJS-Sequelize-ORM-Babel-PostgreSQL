@@ -53,3 +53,24 @@ export const saveProject = async (req,res)=>{
   }
 
 }
+
+export const updateProject = async (req,res)=>{
+  
+}
+
+export const deleteProject = async (req,res)=>{
+  const { projectId } = req.params 
+  try {
+    const deleteRowCount = await Project.destroy({
+      where: {
+        id: projectId 
+      }
+    })
+    return res.json({
+      msg: "Project deleted successfully!",
+      count: deleteRowCount
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
