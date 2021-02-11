@@ -1,3 +1,5 @@
+CREATE DATABASE node_postgresql_rest_api;
+
 CREATE TABLE IF NOT EXISTS projects(
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL CHECK (name <> ''),
