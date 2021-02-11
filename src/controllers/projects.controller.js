@@ -11,7 +11,19 @@ export const getProjects = async (req,res)=>{
   }
 }
 
-
+export const getProject = async (req,res)=>{
+  const { projectId } = req.params
+  try {
+    const project = await Project.findOne({
+      where: {
+        id: projectId
+      }
+    })
+    return res.json(project)
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 export const saveProject = async (req,res)=>{
   const {name,priority,description,deliveryday} = req.body
