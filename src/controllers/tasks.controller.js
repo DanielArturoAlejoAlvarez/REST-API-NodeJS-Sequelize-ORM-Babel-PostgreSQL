@@ -85,4 +85,20 @@ export const updateTask = async (req, res) => {
   }
 };
 
-export const deleteTask = (req, res) => {};
+export const deleteTask = async (req, res) => {
+  const { taskId } = req.params;
+
+  try {
+    const deleteRowCount = await Task.destroy({
+      where: {
+        id: taskId
+      }
+    })
+    return res.json({
+      msg: "Task deleted successfully!",
+      count: deleteRowCount,
+    })
+  } catch (error) {
+    console.log(error)
+  }
+};
