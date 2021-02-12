@@ -1,9 +1,10 @@
+import config from './keys'
 import Sequelize from "sequelize";
 
 export const sequelize = new Sequelize(
-  'node_postgresql_rest_api',
-  'postgres',
-  'Br1tney$2=',
+  config.DB.URI,
+  config.DB.USER,
+  config.DB.PASSWORD,
   {
     host: '127.0.0.1',
     dialect: 'postgres',
