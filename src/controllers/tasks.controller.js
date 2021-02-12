@@ -102,3 +102,21 @@ export const deleteTask = async (req, res) => {
     console.log(error)
   }
 };
+
+export const getTaskByProject = async (req,res)=>{
+  const { projectId } = req.params 
+
+  try {
+    const tasks = await Task.findAll({
+      attributes: ['id','name','done','projectid'],
+      where: {
+        projectid: projectId
+      }
+    })
+  
+    return res.json(tasks)
+  } catch (error) {
+    console.log(error)
+  }
+
+}
