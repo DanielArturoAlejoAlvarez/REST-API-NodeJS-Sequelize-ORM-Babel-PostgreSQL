@@ -27,29 +27,3 @@ export const getTask = async (req,res)=>{
   res.json(task)
 }
 
-export const saveTask = async (req,res)=>{
-  const { name, done, projectid } = req.body 
-
-  try {
-    const newTask = await Task.create({
-      name,
-      done,
-      projectid
-    },
-    {
-      fields: ['name','done','projectid']
-    })
-  
-    res.json({
-      msg: "Task saved successfully!",
-      data: newTask
-    })
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      msg: "Something goes wrong!",
-      data: {},
-    });
-  }
-
-}
