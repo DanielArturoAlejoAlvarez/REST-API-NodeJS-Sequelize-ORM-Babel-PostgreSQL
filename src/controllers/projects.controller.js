@@ -1,106 +1,106 @@
-import Project from '../models/Project'
+import Project from "../models/Project";
 
-export const getProjects = async (req,res)=>{
+export const getProjects = async (req, res) => {
   try {
-    const projects = await Project.findAll()
+    const projects = await Project.findAll();
     return res.json({
-      data: projects
-    })
+      data: projects,
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
-export const getProject = async (req,res)=>{
-  const { projectId } = req.params
+export const getProject = async (req, res) => {
+  const { projectId } = req.params;
   try {
     const project = await Project.findOne({
       where: {
-        id: projectId
-      }
-    })
-    return res.json(project)
+        id: projectId,
+      },
+    });
+    return res.json(project);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
-export const saveProject = async (req,res)=>{
-  const {name,priority,description,deliveryday} = req.body
+export const saveProject = async (req, res) => {
+  const { name, priority, description, deliveryday } = req.body;
 
   try {
-    const newProject = await Project.create({
-      name,
-      priority,
-      description,
-      deliveryday
-    }, {
-      fields: ['name','priority','description','deliveryday']
-    })
-  
+    const newProject = await Project.create(
+      {
+        name,
+        priority,
+        description,
+        deliveryday,
+      },
+      {
+        fields: ["name", "priority", "description", "deliveryday"],
+      }
+    );
+
     if (newProject) {
       return res.json({
         msg: "Project saved successfully!",
-        data: newProject
-      })
+        data: newProject,
+      });
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json({
       msg: "Something goes wrong!",
-      data: {}
-    })
+      data: {},
+    });
   }
+};
 
-}
-
-export const updateProject = async (req,res)=>{
-
-  const { name, priority, description, deliveryday } = req.body
-  const { projectId } = req.params
+export const updateProject = async (req, res) => {
+  const { name, priority, description, deliveryday } = req.body;
+  const { projectId } = req.params;
 
   try {
     const projects = await Project.findAll({
-      attributes: ['id','name','priority','description','deliveryday'],
+      attributes: ["id", "name", "priority", "description", "deliveryday"],
       where: {
-        id: projectId
-      }
-    })
-  
-    if (projects.length>0) {    
-      projects.forEach(async project=>{
+        id: projectId,
+      },
+    });
+
+    if (projects.length > 0) {
+      projects.forEach(async (project) => {
         await project.update({
           name,
           priority,
           description,
-          deliveryday
-        })
-      })
+          deliveryday,
+        });
+      });
     }
-  
+
     return res.json({
       msg: "Project updated successfully!",
-      data: projects
-    })
+      data: projects,
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-  
-}
+};
 
-export const deleteProject = async (req,res)=>{
-  const { projectId } = req.params 
+export const deleteProject = async (req, res) => {
+  const { projectId } = req.params;
   try {
     const deleteRowCount = await Project.destroy({
       where: {
-        id: projectId 
-      }
-    })
+        id: projectId,
+      },
+    });
     return res.json({
       msg: "Project deleted successfully!",
-      count: deleteRowCount
-    })
+      count: deleteRowCount,
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};

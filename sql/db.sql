@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS projects(
   priority INTEGER NOT NULL,
   description TEXT,
   deliveryday DATE NOT NULL
-)
+);
 
 CREATE TABLE IF NOT EXISTS tasks(
   id SERIAL PRIMARY KEY,

@@ -24,7 +24,7 @@ const Project = sequelize.define('projects', {
   timestamps: false
 });
 
-Project.hasMany(Task, {primaryKey: 'projectid', sourceKey: 'id'})
-Task.belongsTo(Project, {primaryKey: 'projectid', sourceKey: 'id'})
+Project.hasMany(Task, {foreignKey: 'projectid', sourceKey: 'id'});
+Task.belongsTo(Project, {foreignKey: 'projectid', sourceKey: 'id'});
 
 export default Project;
