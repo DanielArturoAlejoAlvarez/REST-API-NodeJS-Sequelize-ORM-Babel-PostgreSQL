@@ -19,7 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "morgan": "^1.10.0",
     "pg": "^8.5.1",
     "pg-hstore": "^2.3.3",
